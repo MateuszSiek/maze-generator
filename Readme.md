@@ -1,6 +1,7 @@
 # Maze generator
 Simple custom html component which generate maze image either as a vector graphics with svg or raster graphic with canvas.
 
+![maze](https://user-images.githubusercontent.com/16710005/34907542-3ce527f2-f878-11e7-8e35-89649fce919a.gif)
 ## Usage
 Copy `maze-generator.min.js` file from `dist` directory and include it in your `index.html` file.
 ```html
