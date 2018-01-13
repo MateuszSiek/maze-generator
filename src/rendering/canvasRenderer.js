@@ -19,7 +19,6 @@ export function renderMazeCanvas( maze, container, { cellSize, animate } = confi
 	const ctx = canvas.getContext("2d");
 	ctx.clearRect(0, 0, width * cellSize, height * cellSize);
 	ctx.beginPath();
-	console.log(ctx);
 	let i = 0;
 	const delayRender = () => {
 		requestAnimationFrame(() => {

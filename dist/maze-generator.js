@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -68,57 +68,75 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__rendering_svgRenderer__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rendering_canvasRenderer__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_maze__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_defaults__ = __webpack_require__(4);
+const D_CELL_SIZE = 10;
+/* harmony export (immutable) */ __webpack_exports__["a"] = D_CELL_SIZE;
 
+const D_X_COUNT = 10;
+/* harmony export (immutable) */ __webpack_exports__["b"] = D_X_COUNT;
 
+const D_Y_COUNT = 10;
+/* harmony export (immutable) */ __webpack_exports__["d"] = D_Y_COUNT;
 
+const D_X_START = 0;
+/* harmony export (immutable) */ __webpack_exports__["c"] = D_X_START;
 
+const D_Y_START = 0;
+/* harmony export (immutable) */ __webpack_exports__["e"] = D_Y_START;
 
-
-class MazeGenerator extends HTMLElement {
-	constructor() {
-		// Always call super first in constructor
-		super();
-		const mazeWidth = Number(this.dataset.xCount) || __WEBPACK_IMPORTED_MODULE_3__utils_defaults__["b" /* D_X_COUNT */];
-		const mazeHeight = Number(this.dataset.yCount) || __WEBPACK_IMPORTED_MODULE_3__utils_defaults__["d" /* D_Y_COUNT */];
-		const startX = Number(this.dataset.xStart) || __WEBPACK_IMPORTED_MODULE_3__utils_defaults__["c" /* D_X_START */];
-		const startY = Number(this.dataset.yStart) || __WEBPACK_IMPORTED_MODULE_3__utils_defaults__["e" /* D_Y_START */];
-		const cellSize = Number(this.dataset.cellSize) || __WEBPACK_IMPORTED_MODULE_3__utils_defaults__["a" /* D_CELL_SIZE */];
-		const animate = this.dataset.animate === 'true';
-		const maze = Object(__WEBPACK_IMPORTED_MODULE_2__utils_maze__["a" /* generateMaze */])({
-			width : mazeWidth,
-			height: mazeHeight,
-			startX, startY
-		});
-		const div = document.createElement('span');
-		// div.style.display = 'inline-block';
-		console.log(maze);
-		if ( this.dataset.graphicType === 'raster' ) {
-			Object(__WEBPACK_IMPORTED_MODULE_1__rendering_canvasRenderer__["a" /* renderMazeCanvas */])(maze, div, { cellSize, animate });
-		}
-		else {
-			Object(__WEBPACK_IMPORTED_MODULE_0__rendering_svgRenderer__["a" /* renderMazeSvg */])(maze, div, { cellSize, animate });
-		}
-		this.appendChild(div);
-	}
-}
-/* harmony export (immutable) */ __webpack_exports__["MazeGenerator"] = MazeGenerator;
-
-
-customElements.define('maze-generator', MazeGenerator);
 
 /***/ }),
 /* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__rendering_svgRenderer__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rendering_canvasRenderer__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_maze__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_defaults__ = __webpack_require__(0);
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+	customElements.define('maze-generator', MazeGenerator);
+});
+
+class MazeGenerator extends HTMLElement {
+	constructor() {
+		super();
+		const mazeWidth = Number(this.dataset.xCount) || __WEBPACK_IMPORTED_MODULE_3__utils_defaults__["b" /* D_X_COUNT */]; // number of horizontal cells
+		const mazeHeight = Number(this.dataset.yCount) || __WEBPACK_IMPORTED_MODULE_3__utils_defaults__["d" /* D_Y_COUNT */]; // number of vertical cells
+		const startX = Number(this.dataset.xStart) || __WEBPACK_IMPORTED_MODULE_3__utils_defaults__["c" /* D_X_START */]; // position of first mace cell
+		const startY = Number(this.dataset.yStart) || __WEBPACK_IMPORTED_MODULE_3__utils_defaults__["e" /* D_Y_START */]; // position of first mace cell
+		const cellSize = Number(this.dataset.cellSize) || __WEBPACK_IMPORTED_MODULE_3__utils_defaults__["a" /* D_CELL_SIZE */]; // cell size in pixels
+		const animate = this.dataset.animate === 'true';
+		const maze = Object(__WEBPACK_IMPORTED_MODULE_2__utils_maze__["a" /* generateMaze */])({
+			width : mazeWidth,
+			height: mazeHeight,
+			startX, startY
+		});
+		if ( this.dataset.graphicType === 'raster' ) {
+			Object(__WEBPACK_IMPORTED_MODULE_1__rendering_canvasRenderer__["a" /* renderMazeCanvas */])(maze, this, { cellSize, animate });
+		}
+		else {
+			Object(__WEBPACK_IMPORTED_MODULE_0__rendering_svgRenderer__["a" /* renderMazeSvg */])(maze, this, { cellSize, animate });
+		}
+	}
+}
+/* harmony export (immutable) */ __webpack_exports__["MazeGenerator"] = MazeGenerator;
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = renderMazeSvg;
 /* unused harmony export getMazeSquare */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_defaults__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_defaults__ = __webpack_require__(0);
 
 
 const NS = 'http://www.w3.org/2000/svg';
@@ -222,12 +240,12 @@ function getMazeSquare( walls, cellSize ) {
 }
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = renderMazeCanvas;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_defaults__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_defaults__ = __webpack_require__(0);
 
 
 const configDefaults = {
@@ -249,7 +267,6 @@ function renderMazeCanvas( maze, container, { cellSize, animate } = configDefaul
 	const ctx = canvas.getContext("2d");
 	ctx.clearRect(0, 0, width * cellSize, height * cellSize);
 	ctx.beginPath();
-	console.log(ctx);
 	let i = 0;
 	const delayRender = () => {
 		requestAnimationFrame(() => {
@@ -300,7 +317,7 @@ function renderMazeSquare( ctx, squareDesc, height, cellSize ) {
 }
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -417,27 +434,6 @@ function generateMaze( { width, height, startX, startY } ) {
 
 	return visitedStackOrdered;
 };
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-const D_CELL_SIZE = 10;
-/* harmony export (immutable) */ __webpack_exports__["a"] = D_CELL_SIZE;
-
-const D_X_COUNT = 10;
-/* harmony export (immutable) */ __webpack_exports__["b"] = D_X_COUNT;
-
-const D_Y_COUNT = 10;
-/* harmony export (immutable) */ __webpack_exports__["d"] = D_Y_COUNT;
-
-const D_X_START = 0;
-/* harmony export (immutable) */ __webpack_exports__["c"] = D_X_START;
-
-const D_Y_START = 0;
-/* harmony export (immutable) */ __webpack_exports__["e"] = D_Y_START;
 
 
 /***/ })

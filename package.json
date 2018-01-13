@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --config webpack.dev.config.js",
+    "build:w": "webpack --config webpack.dev.config.js --watch",
+    "build:prod": "webpack --config webpack.prod.config.js",
     "test": "karma start"
   },
   "author": "",
@@ -17,8 +19,9 @@
     "karma-jasmine": "^1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
     "karma-webpack": "^2.0.9",
-    "webpack": "^3.6.0"
+    "uglifyjs-webpack-plugin": "^1.1.6",
+    "webpack": "^3.6.0",
+    "webpack-uglify-js-plugin": "^1.1.9"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
